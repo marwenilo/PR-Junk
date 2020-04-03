@@ -1,17 +1,16 @@
-body{
-    background-color: #e5e5e5;
-    color: #3c4858;
-    margin: 0;
-    font-size: 1rem;
-    text-align: left;
+body {
+  background-color: #e5e5e5;
+  color: #3c4858;
+  margin: 0;
+  font-size: 1rem;
+  text-align: left;
 }
-
 
 .App {
   text-align: center;
 }
 
-.headerContainer{
+.headerContainer {
   background-image: url(./assets/welcom-idea.jpg);
   display: flex;
   flex-direction: column;
@@ -28,19 +27,16 @@ body{
   align-items: center;
   background-size: cover;
   background-position: 0px -32px;
+}
 
-} 
-
-.bodyContainer{
+.bodyContainer {
   padding: 85px 0;
   margin: -129px 45px 0px;
-  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14),
+    0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
   border-radius: 6px;
   z-index: 3;
   position: relative;
-  background: #FFFFFF;
+  background: #ffffff;
   min-height: 50vh;
-
 }
-
-
