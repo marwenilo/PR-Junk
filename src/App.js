@@ -1,12 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
+import welcomIdea from  './assets/welcom-idea.jpg';
 import './App.css';
   
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-       <h1>Hello There</h1>
+       <div className="headerContainer">
+       
+       
+       
+     
+     
+       </div>
+      <div className="bodyContainer"> 
+      
+      
+      
+      
+      
+      <h1>Hello There</h1>
+
+
+<p> My name is <strong>Marwen Magri</strong> and in this site i'm building right now you will find a lot of useful react UI 
+components and alote of <strong>"JavaScript-React-Redux"</strong> code Junk</p>
+
+
+
+      </div>
+      
       </header>
     </div>
   );
