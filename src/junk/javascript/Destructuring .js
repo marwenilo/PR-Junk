@@ -1,12 +1,14 @@
+//Destructuring
+
 const student = {
     ID: '21',
     name: 'Jhon',
     GPA: '3.0',
   };
   
-  const id = student.ID;
-  const name = student.name;
-  const GPA = student.GPA;
+    const id = student.ID;
+    const name = student.name;
+    const GPA = student.GPA;
 
   //or
 
