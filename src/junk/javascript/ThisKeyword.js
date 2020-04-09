@@ -33,7 +33,7 @@ class Developer {
   var hobbit = new Developer('Frodo', 'Baggins');
   
 
-  
+
 
 //*********************
 
@@ -92,7 +92,7 @@ printInfo.apply(me, languages);
 // ===> *bind()* <===
 
 // When called on a function, .bind() sets a this context and returns a new function with a bound this context. Consider the code below.
-
+class Developer{ 
 constructor(firstname, lastname) {
     this.firstname = firstname;
     this.lastname = lastname;
