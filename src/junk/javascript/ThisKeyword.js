@@ -33,14 +33,6 @@ class Developer {
   var hobbit = new Developer('Frodo', 'Baggins');
   
 
-
-  
-
-
-  
-
-
-
 //*********************
 
 🏹 🏹 🏹 🏹 🏹 🏹 
