@@ -33,6 +33,8 @@ class Developer {
   var hobbit = new Developer('Frodo', 'Baggins');
   
 
+  
+
 //*********************
 
 🏹 🏹 🏹 🏹 🏹 🏹 
@@ -78,3 +80,36 @@ printInfo.call(me, languages[0], languages[1], languages[2]);
 
 // Pass all the arguments in one array to .apply()
 printInfo.apply(me, languages);
+
+
+
+
+
+
+//*********************
+
+🏹 🏹 🏹 🏹 🏹 🏹 
+// ===> *bind()* <===
+
+// When called on a function, .bind() sets a this context and returns a new function with a bound this context. Consider the code below.
+
+constructor(firstname, lastname) {
+    this.firstname = firstname;
+    this.lastname = lastname;
+  }
+}
+
+var printName = function() {
+  console.log(`My name is ${this.firstname} ${this.lastname}`);
+};
+
+var me = new Developer('Robin', 'Wieruch');
+
+// Here we bind the me object to the printName() function and get a new function called newPrintName()
+const newPrintName = printName.bind(me);
+
+// bound newPrintName() prints appropriately
+newPrintName();
+
+// unbound printName() prints undefined
+printName();
