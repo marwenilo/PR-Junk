@@ -113,3 +113,76 @@ newPrintName();
 
 // unbound printName() prints undefined
 printName();
+
+
+
+
+
+
+//*********************
+
+🏹 🏹 🏹 🏹 🏹 🏹 
+// ===> *Global Context* <===
+
+// When this is used outside of any context such as a class, function, or object, 
+// it refers to the global object. The global object in the browser is usually the window object. 
+// Use the code below, which simply prints the global this object, and open it with a browser of your choice. 
+// Then examine your browser’s console (inspect element > console). 
+// It will say something like “window{document:…”. That is the global window object that this refers to. 
+// In the case of a terminal and in our case the global object is undefined.
+<html>
+    <head>
+        <script>console.log(this)</script>
+    </head>
+</html>
+// this is undefined in terminals/command prompts
+console.log(this);
+
+
+
+
+
+
+//*********************
+
+🏹 🏹 🏹 🏹 🏹 🏹 
+// ===> *Global Context* <===
+
+// Consider the code block below. 
+// this gives you an error. This is because methods like apply(), and bind(), etc. 
+// don’t have any effect on this in an arrow function in Javascript. 
+// The value of this remains the same as it was when the function was called. 
+// If you want to bind to a different value, you need to use a function expression.
+
+class Developer {
+  constructor(firstname, lastname) {
+    this.firstname = firstname;
+    this.lastname = lastname;
+  }
+}
+
+// declare getName() outside of the Developer class using arrow functions
+var getName = () => console.log(this.firstname);
+
+var me = new Developer('Robin', 'Wieruch');
+const printMyName = getName.bind(me);
+
+printMyName();
+
+
+
+
+
+
+//====> 
+let me = {
+  firstname: "Robin",
+  getName: function(){
+    console.log(this.name);
+  }
+}
+
+// You have to bind the function to the object because just assigning it to a var
+// ... is equivalent to assigning a standalone function to a var
+var getMyName = me.getName.bind(me);
+getMyName();
