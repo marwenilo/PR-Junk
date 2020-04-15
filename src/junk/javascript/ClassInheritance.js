@@ -8,6 +8,8 @@
 // So, the derived class, ReactDeveloper, inherits all the abilities from the base class, 
 // Developer, and also adds its specialized capabilities, namely the getJob() method to it.
 
+
+//====> superclass or base class
 class Developer {
     constructor(firstname, lastname) {
       this.firstname = firstname;
@@ -18,7 +20,7 @@ class Developer {
       return this.firstname + ' ' + this.lastname;
     }
   }
-  
+  //====> subclass or derived class
   class ReactDeveloper extends Developer {
     getJob() {
       return 'React Developer';
