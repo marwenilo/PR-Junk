@@ -52,3 +52,24 @@ This method is called when the component is removed from the DOM.
 It is generally used when you want to clear up things related to the component. 
 For example, when a user logs outs of an application, 
 you may want to clear their credentials and the other authorization tokens due to security purposes.
+
+
+
+🏹 🏹 🏹 🏹 🏹 🏹 
+==>constructor()
+
+Called just once when the component is instantiated.
+
+
+
+🏹 🏹 🏹 🏹 🏹 🏹 
+==>shouldComponentUpdate()
+
+Method used for component-level performance optimization
+
+
+
+🏹 🏹 🏹 🏹 🏹 🏹 
+==>componentWillReceiveProps() (deprecated)
+
+Replaced by getDerivedStateFromProps, called before the mount and also after each component re-render.
