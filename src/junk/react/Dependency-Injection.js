@@ -131,3 +131,104 @@ function Title() {
 
 🏹 🏹 🏹 🏹 🏹 🏹 
 // Using the module system 
+
+// If we don’t want to use the context there are a couple of other ways to achieve the injection. 
+// They are not exactly React specific, but worth mentioning nevertheless. One of them is to use the module system.
+
+// the typical module system in JavaScript has a caching mechanism. It’s nicely noted in Node’s documentation:
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+// ***Modules are cached after the first time they are loaded. 
+// This means (among other things) that every call to require(‘foo’) will get exactly the same object returned, if it would resolve to the same file.***
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+// ***Multiple calls to require(‘foo’) may not cause the module code to be executed multiple times. 
+// This is an important feature. With it, “partially done” objects can be returned, 
+// thus allowing transitive dependencies to be loaded even when they would cause cycles.***
+
+
+// How does that help in our injection? 
+// Well, if we export an object we are actually exporting a singleton and every other module that imports the file will get the same object. 
+// This allows us to register our dependencies and later fetch them in another file.
+
+// by create a new file called "di.js" with the following content:
+
+var dependencies = {};
+
+export function register(key, dependency) {
+  dependencies[key] = dependency;
+}
+
+export function fetch(key) {
+  if (dependencies[key]) return dependencies[key];
+  throw new Error(`"${ key } is not registered as dependency.`);
+}
+
+export function wire(Component, deps, mapper) {
+  return class Injector extends React.Component {
+    constructor(props) {
+      super(props);
+      this._resolvedDependencies = mapper(...deps.map(fetch));
+    }
+    render() {
+      return (
+        <Component
+          {...this.state}
+          {...this.props}
+          {...this._resolvedDependencies}
+        />
+      );
+    }
+  };
+}
+
+// We’ll store the dependencies in dependencies global variable (it’s global for our module, not for the whole application). 
+// We then export two functions register and fetch that write and read entries. 
+// It looks a little bit like implementing setter and getter functions against a simple JavaScript object. 
+// Then we have the wire function that accepts our React component and returns a higher-order component. 
+// In the constructor of that component we are resolving the dependencies and later, 
+// while rendering the original component, we pass them as props. 
+// We follow the same pattern where we describe what we need (deps argument) and extract the needed props with a mapper function.
+
+// Having the di.jsx helper, we are once again able to register our dependencies at the entry point of our application (app.jsx) and inject them wherever (Title.jsx) we need.
+
+// app.js
+import Header from './Header.js';
+import { register } from './di.js';
+
+register('my-awesome-title', 'React in patterns');
+
+class App extends React.Component {
+  render() {
+    return <Header />;
+  }
+};
+
+// -----------------------------------
+// Header.js
+import Title from './Title.js';
+
+export default function Header() {
+  return (
+    <header>
+      <Title />
+    </header>
+  );
+}
+
+// -----------------------------------
+// Title.js
+import { wire } from './di.js';
+
+var Title = function(props) {
+  return <h1>{ props.title }</h1>;
+};
+
+export default wire(
+  Title,
+  ['my-awesome-title'],
+  title => ({ title })
+);
+
+// If we look at the Title.jsx file we’ll see that the actual component and the wiring may live in different files. 
+// That way the component and the mapper function become easily unit testable.
