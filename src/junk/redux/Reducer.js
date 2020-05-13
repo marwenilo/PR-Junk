@@ -23,3 +23,42 @@ const counterReducer = function (state, action) {
 
 // There are no side effects and we return a brand new object every time. 
 // We accumulate the new value based on the previous state and the incoming action type.
+
+
+
+// combineReducers
+
+// Redux comes with a helper that allows us to target a specific part of the state and assign a reducer to it. 
+// It is called combineReducers:
+//if working at the store
+import { createStore, combineReducers } from 'redux';
+
+const rootReducer = combineReducers({
+  counter: function A() { ... },
+  visible: function B() { ... }
+});
+const store = createStore(rootReducer);
+//if working on a rootReducer file
+const rootReducer = combineReducers({
+    counter: counterReducer,
+    visible: visibilityReducer
+  });
+// Function "A" receives only the counter slice as a state and needs to return only that part. 
+// The same goes for "B", it also receives only the counter slice as a state. 
+// Accepts a boolean (the value of visible) and must return a boolean.
+
+
+🏹 🏹 🏹 🏹 🏹 🏹 
+// Selectors 
+
+// we know that our state is usually divided into different parts. 
+// We have dedicated reducers to update the data but when it comes to fetching it we still have a single object. 
+// Here is the place where the selectors come in handy. 
+// The selector is a function that accepts the whole state object and extracts only the information that we need. 
+// For example in our small app we need two of those:
+const getCounterValue = state => state.counter.value;
+const getVisibility = state => state.visible;
+// Selectors come with this stuff but they are also contextual and may contain logic. 
+// Since they have access to the whole state they are able to answer business logic related questions. 
+// Like for example “Is the user authorized to do X while being on page Y”. 
+// This may be done in a single selector.

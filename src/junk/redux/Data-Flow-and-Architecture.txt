@@ -66,3 +66,34 @@ const mapDispatchToProps = dispatch => ({
 //   The props sent to the component gives us the opportunity to accumulate better props. 
 //   Like for example if we need to fire two actions we may combine them to a single prop and send that to React. 
 //   "options" accepts couple of settings that control how the connection works. 
+
+
+
+🏹 🏹 🏹 🏹 🏹 🏹 
+// Selectors 
+
+// we know that our state is usually divided into different parts. 
+// We have dedicated reducers to update the data but when it comes to fetching it we still have a single object. 
+// Here is the place where the selectors come in handy. 
+// The selector is a function that accepts the whole state object and extracts only the information that we need. 
+// For example in our small app we need two of those:
+const getCounterValue = state => state.counter.value;
+const getVisibility = state => state.visible;
+// Selectors come with this stuff but they are also contextual and may contain logic. 
+// Since they have access to the whole state they are able to answer business logic related questions. 
+// Like for example “Is the user authorized to do X while being on page Y”. 
+// This may be done in a single selector.
+function App({ visible }) {
+    return (
+      <div>
+        <VisibilityConnected />
+        { visible && <CounterConnected /> }
+      </div>
+    );
+  }
+  const AppConnected = connect(
+    state => ({
+      visible: getVisibility(state)
+    })
+  )(App);
+//   "getVisibility" selector returns a boolean that indicates whether CounterConnected will be rendered or not.
