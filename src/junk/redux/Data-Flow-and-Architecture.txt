@@ -1,0 +1,27 @@
+// One-way direction data flow is the idea that the components do not modify the data that they receive. 
+// They only listen for changes in​ this data and maybe provide the new value but they do not update the actual data. 
+// This update happens following another mechanism, 
+// in another place and the component just gets re-rendered with the new value, if any.
+
+// The benefit that comes with this pattern is that our components become a dummy representation of the store’s data. 
+// There is only one source of truth and this makes development easier. 
+
+
+🏹 🏹 🏹 🏹 🏹 🏹 
+// Architecture and Main 
+
+// Redux is a library that acts as a state container and helps to manage your application data flow. 
+// It was introduced back in 2015 at ReactEurope conference by "Dan Abramov".
+
+
+// Similar to Flux architecture we have the view components (React) dispatching an action. 
+// Same action may be dispatched by another part of our system. Like a bootstrap logic for example. 
+// This action is dispatched not to a central hub but directly to the store. 
+// We are saying “store” not “stores” because there is only one in Redux. 
+// That is one of the big differences between Flux and Redux. 
+// The logic that decided how our data changes lives in pure functions called reducers. 
+// Once the store receives an action it asks the reducers about the new version of the state by sending the current state and the given action. 
+// Then in immutable fashion the reducer needs to return the new state. The store continues from there and updates its internal state. 
+// As a final step, the React component wired to the store gets re-rendered
+
+// The concept is pretty linear and again follows the one-direction data flow.
