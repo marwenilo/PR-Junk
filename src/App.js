@@ -1,4 +1,5 @@
 import React from "react";
+
 // import ReactMarkdown from "react-markdown"
 import "./App.css";
 // https://www.npmjs.com/package/react-simple-code-editor
@@ -19,6 +20,7 @@ function App() {
         <div className="bodyContainer">
           <h1>Hello There</h1>
           <p>
+          
             {" "}
             My name is
             <strong> Marwen Magri</strong> and in this site i'm building right
